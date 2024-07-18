@@ -25,7 +25,7 @@
     <mat-label>Enter your phone number</mat-label>
     <input
       matInput
-      placeholder="Phone number"
+      placeholder="+380123123123"
       formControlName="phoneNumberField"
       required
     />
@@ -75,5 +75,8 @@
     <mat-error>{{ getMessage(fields.addressField) }}</mat-error>
     }
   </mat-form-field>
-  <button type="submit">Update</button>
+  <div class="button-container">
+    <button class="button" mat-raised-button type="submit">Update</button>
+    <button class="button" mat-raised-button type="button" (click)="goToPreviousPage()">Go back</button>
+  </div>
 </form>

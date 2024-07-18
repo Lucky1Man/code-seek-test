@@ -1,19 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CreateContactDto } from '../../shared/create-contact-dto';
 import { getMeaningfulMessage } from '../../shared/input-fields-utils';
 import { ContactsService } from '../services/contacts.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 
 type ContactForm = {
   nameField: FormControl;
@@ -40,7 +37,9 @@ export class AddContactComponent {
 
   constructor(
     private contactsService: ContactsService,
-    private router: Router
+    private router: Router,
+    private location: Location,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   contactForm = new FormGroup({
@@ -96,5 +95,9 @@ export class AddContactComponent {
         })
       )
       .then(() => this.router.navigate(['/']));
+  }
+
+  goToPreviousPage() {
+    this.router.navigate(['..']);
   }
 }

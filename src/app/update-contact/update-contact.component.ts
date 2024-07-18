@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { getMeaningfulMessage } from '../../shared/input-fields-utils';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
 
 type UpdateContactFormType = {
   nameField: FormControl<string | null>;
@@ -34,7 +35,8 @@ type UpdateContactFormType = {
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatButtonModule,
   ],
   templateUrl: './update-contact.component.html',
   styleUrl: './update-contact.component.scss',
@@ -86,10 +88,9 @@ export class UpdateContactComponent implements OnInit {
             Validators.required,
             Validators.pattern(this.phoneNumberRegex),
           ]),
-          birthDateField: new FormControl(
-            oldContact.birthDate,
-            [Validators.required]
-          ),
+          birthDateField: new FormControl(oldContact.birthDate, [
+            Validators.required,
+          ]),
           emailField: new FormControl(oldContact.email, [
             Validators.required,
             Validators.email,
@@ -119,6 +120,10 @@ export class UpdateContactComponent implements OnInit {
       emailField,
       addressField,
     } = this.updateContactForm.controls;
+    if (this.updateContactForm.invalid) {
+      this.updateContactForm.markAllAsTouched();
+      return;
+    }
     this.contactService
       .updateContact(
         new UpdateContactDto({
@@ -139,8 +144,7 @@ export class UpdateContactComponent implements OnInit {
               : undefined,
           birthDate:
             birthDateField.value !== null &&
-            birthDateField.value !==
-              this.oldContact.birthDate
+            birthDateField.value !== this.oldContact.birthDate
               ? birthDateField.value.toLocaleDateString()
               : undefined,
           email:
@@ -156,5 +160,9 @@ export class UpdateContactComponent implements OnInit {
         })
       )
       .then(() => this.router.navigate(['/']));
+  }
+
+  goToPreviousPage() {
+    this.router.navigate(['..']);
   }
 }

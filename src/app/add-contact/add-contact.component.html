@@ -8,9 +8,9 @@
         class="input-field"
         placeholder="Name*"
         formControlName="nameField"
-        name="name"
+        id="create-contact-form-name-1"
       />
-      <label class="input-label" for="name">Enter name*:</label>
+      <label class="input-label" for="create-contact-form-name-1">Enter name*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.nameField)" class="input-errors">
@@ -23,9 +23,9 @@
         class="input-field"
         placeholder="Surname*"
         formControlName="surnameField"
-        name="surname"
+        id="create-contact-form-surname-1"
       />
-      <label class="input-label" for="surname">Enter surname*:</label>
+      <label class="input-label" for="create-contact-form-surname-1">Enter surname*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.surnameField)" class="input-errors">
@@ -36,11 +36,11 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Phone number*"
+        placeholder="+380123123123*"
         formControlName="phoneNumberField"
-        name="phoneNumber"
+        id="create-contact-form-phoneNumber-1"
       />
-      <label class="input-label" for="phoneNumber">Enter phone number*:</label>
+      <label class="input-label" for="create-contact-form-phoneNumber-1">Enter phone number*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.phoneNumberField)" class="input-errors">
@@ -53,10 +53,10 @@
         class="input-field"
         placeholder="Birth date* MM/DD/YYYY"
         formControlName="birthDateField"
-        name="birthDate"
+        id="create-contact-form-birthDate-1"
         [matDatepicker]="picker"
       />
-      <label class="input-label" for="birthDate">Enter birth date*:</label>
+      <label class="input-label" for="create-contact-form-birthDate-1">Enter birth date*:</label>
       <span class="input-highlight"></span>
       <mat-datepicker-toggle
         matIconSuffix
@@ -75,9 +75,9 @@
         class="input-field"
         placeholder="Email*"
         formControlName="emailField"
-        name="email"
+        id="create-contact-form-email-1"
       />
-      <label class="input-label" for="email">Enter email*:</label>
+      <label class="input-label" for="create-contact-form-email-1">Enter email*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.emailField)" class="input-errors">
@@ -90,9 +90,9 @@
         class="input-field"
         placeholder="Address*"
         formControlName="addressField"
-        name="address"
+        id="create-contact-form-address-1"
       />
-      <label class="input-label" for="address">Enter address*:</label>
+      <label class="input-label" for="create-contact-form-address-1">Enter address*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.addressField)" class="input-errors">
@@ -101,5 +101,6 @@
   </div>
   <div class="button-container">
     <button class="button" type="submit">Create</button>
+    <button class="button" type="button" (click)="goToPreviousPage()">Go back</button>
   </div>
 </form>
