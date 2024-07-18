@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { ContactsShareService } from '../services/contacts-share.service';
 import { ContactsService } from '../services/contacts.service';
-import { Router } from '@angular/router';
+import { ContactsFilterComponent } from "../contacts-filter/contacts-filter.component";
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [ContactsListComponent],
+  imports: [ContactsListComponent, ContactsFilterComponent],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ContactsList, ManagedContactsListItem } from '../../shared/contacts-list';
+import {
+  ContactsList,
+  ManagedContactFilter,
+  ManagedContactListItem,
+} from '../../shared/contacts-list';
 import { ContactsListItem } from '../../shared/contacts-list-item';
 import { Contact } from '../../shared/contact';
 
@@ -9,11 +13,18 @@ import { Contact } from '../../shared/contact';
 })
 export class ContactsShareService {
   private onContactsSubject = new Subject<ContactsList>();
+  private onFilteredContactsSubject = new Subject<ContactsList>();
 
   private currentContacts = new ContactsList();
 
+  private currentFilteredContacts?: ContactsList;
+  private currentContactsFilters: ManagedContactFilter[] = [() => true];
+
   nextContacts(contacts: ContactsList) {
     this.currentContacts = contacts;
+    if (this.currentFilteredContacts === undefined) {
+      this.nextContactsFilters(this.currentContactsFilters);
+    }
     this.onContactsSubject.next(contacts);
   }
 
@@ -21,12 +32,34 @@ export class ContactsShareService {
     return this.onContactsSubject.subscribe(callback);
   }
 
+  nextContactsFilters(filters: ManagedContactFilter[]) {
+    this.currentFilteredContacts = new ContactsList({
+      contacts: this.currentContacts.contacts.filter((contact) =>
+        filters.some((filter) => filter(contact))
+      ),
+    });
+    this.onFilteredContactsSubject.next(this.currentFilteredContacts);
+    this.currentContactsFilters = filters;
+  }
+
+  onFilteredContacts(callback: (contacts: ContactsList) => void) {
+    return this.onFilteredContactsSubject.subscribe(callback);
+  }
+
   getCurrentContacts() {
     return this.currentContacts;
   }
 
+  getCurrentFilteredContacts() {
+    return this.currentFilteredContacts;
+  }
+
+  getCurrentContactsFilters() {
+    return this.currentContactsFilters;
+  }
+
   addContact(contact: ContactsListItem) {
-    this.currentContacts.contacts.push(new ManagedContactsListItem(contact));
+    this.currentContacts.contacts.push(new ManagedContactListItem(contact));
     this.nextContacts(this.currentContacts);
   }
 
@@ -38,13 +71,14 @@ export class ContactsShareService {
   }
 
   replaceContact(contact: Contact) {
-    const replaceLocation = this.currentContacts.contacts.findIndex(contact => contact.id === contact.id);
+    const replaceLocation = this.currentContacts.contacts.findIndex(
+      (contact) => contact.id === contact.id
+    );
     this.currentContacts.contacts.splice(
       replaceLocation,
       1,
-      new ManagedContactsListItem(contact)
+      new ManagedContactListItem(contact)
     );
     this.nextContacts(this.currentContacts);
   }
-
 }

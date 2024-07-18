@@ -1,0 +1,13 @@
+<input
+  placeholder="Enter name"
+  type="text"
+  [matAutocomplete]="auto"
+  [formControl]="contactNameField"
+/>
+<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+  @for (option of nameOptions; track option) {
+  <mat-option [value]="option">{{ option }}</mat-option>
+  }
+</mat-autocomplete>
+<button type="button" (click)="updateFilter()">Search</button>
+<button type="button" (click)="clearFilter()">Clear filter</button>

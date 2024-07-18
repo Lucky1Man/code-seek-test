@@ -1,0 +1,26 @@
+
+<div class="container">
+    <div class="fields-container">
+        <div class="field-titles-container">
+            <div>Name: </div>
+            <div>Surname: </div>
+            <div>Phone number: </div>
+            <div>Birth date: </div>
+            <div>Email: </div>
+            <div>Address: </div>
+        </div>
+        <div class="field-content-container">
+            <div>{{contact.name}}</div>
+            <div>{{contact.surname}}</div>
+            <div>{{contact.phoneNumber}}</div>
+            <div>{{contact.birthDate.toLocaleDateString()}}</div>
+            <div>{{contact.email}}</div>
+            <div>{{contact.address}}</div>
+            
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="button" mat-raised-button type="button" (click)="goToEditPage()">Edit</button>
+        <button class="button" mat-raised-button type="button" (click)="goToPreviousPage()">Go back</button>
+      </div>
+</div>

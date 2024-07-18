@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fields-container {
+    min-width: 320px;
+    display: flex;
+    justify-content: space-between;
+
+    .field-titles-container {
+        & div {
+            font-size: 20px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    }
+    .field-content-container {
+        & div {
+            font-size: 20px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    .button {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

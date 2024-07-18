@@ -1,14 +1,14 @@
 import { ContactsListItem } from './contacts-list-item';
 
-export class ManagedContactsListItem extends ContactsListItem {
+export class ManagedContactListItem extends ContactsListItem {
   isMarkedForDeletion = false;
-  constructor(data: Partial<ManagedContactsListItem> = {}) {
+  constructor(data: Partial<ManagedContactListItem> = {}) {
     super(data);
   }
 }
 
 export class ContactsList {
-  contacts: ManagedContactsListItem[];
+  contacts: ManagedContactListItem[];
   totalAmount: number;
 
   constructor({
@@ -18,8 +18,10 @@ export class ContactsList {
     contacts?: ContactsListItem[];
     totalAmount?: number;
   } = {}) {
-    this.contacts = contacts.map((val) => new ManagedContactsListItem(val));
+    this.contacts = contacts.map((val) => new ManagedContactListItem(val));
     this.totalAmount = totalAmount;
   }
   
 }
+
+export type ManagedContactFilter = (contact: ManagedContactListItem) => boolean;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Contact } from '../../shared/contact';
 import { ContactsList } from '../../shared/contacts-list';
 import { ContactsListItem } from '../../shared/contacts-list-item';
@@ -9,7 +9,7 @@ import { ContactsShareService } from './contacts-share.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ContactsService {
+export class ContactsService implements OnDestroy {
   private static readonly CONTACTS_KEY = 'contacts';
   private static readonly CURRENT_INDEX_VALUE_KEY = 'index-value';
 
@@ -19,6 +19,10 @@ export class ContactsService {
     ContactsService.contactsIdCounter = Number.parseInt(
       localStorage.getItem(ContactsService.CURRENT_INDEX_VALUE_KEY) ?? '0'
     );
+  }
+
+  ngOnDestroy(): void {
+    console.log('ContactsService destroyed')
   }
 
   async fetchContacts(): Promise<ContactsList> {

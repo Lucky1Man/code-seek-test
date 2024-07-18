@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { UpdateContactDto } from '../../shared/update-contact-dto';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -58,7 +58,7 @@ export class UpdateContactComponent implements OnInit {
 
   constructor(
     private contactService: ContactsService,
-    private router: Router,
+    private location: Location,
     activatedRoute: ActivatedRoute
   ) {
     this.contactId = Number.parseInt(
@@ -71,7 +71,7 @@ export class UpdateContactComponent implements OnInit {
       .then((oldContact) => {
         if (oldContact === undefined) {
           throw new Error(
-            'Error on edit contact page. Old contact not specified'
+            'Error on edit contact page. Old contact not specified or not found!'
           );
         }
         this.oldContact = oldContact;
@@ -159,10 +159,11 @@ export class UpdateContactComponent implements OnInit {
               : undefined,
         })
       )
-      .then(() => this.router.navigate(['/']));
+      .then(() => this.location.back());
   }
 
   goToPreviousPage() {
-    this.router.navigate(['..']);
+    this.location.back();
   }
+
 }

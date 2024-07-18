@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ContactsListItem } from '../../shared/contacts-list-item';
 import { CommonModule } from '@angular/common';
-import { ManagedContactsListItem } from '../../shared/contacts-list';
+import { ManagedContactListItem } from '../../shared/contacts-list';
 import { ContactsShareService } from '../services/contacts-share.service';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './contacts-list-item.component.scss',
 })
 export class ContactsListItemComponent {
-  @Input() contactItem = new ManagedContactsListItem();
+  @Input() contactItem = new ManagedContactListItem();
 
   constructor(private router: Router) {}
 
@@ -24,6 +24,10 @@ export class ContactsListItemComponent {
 
   goToEditContactPage() {
     this.router.navigate(['/editContact', this.contactItem.id])
+  }
+
+  goToContactDetailsPage() {
+    this.router.navigate(['/viewDetails', this.contactItem.id])
   }
 
 }

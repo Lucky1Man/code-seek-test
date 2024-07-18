@@ -24,11 +24,7 @@ type ContactForm = {
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    MatDatepickerModule
-  ],
+  imports: [ReactiveFormsModule, CommonModule, MatDatepickerModule],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',
 })
@@ -37,9 +33,7 @@ export class AddContactComponent {
 
   constructor(
     private contactsService: ContactsService,
-    private router: Router,
-    private location: Location,
-    private cdr: ChangeDetectorRef,
+    private location: Location
   ) {}
 
   contactForm = new FormGroup({
@@ -94,10 +88,10 @@ export class AddContactComponent {
           address: addressField.value ?? undefined,
         })
       )
-      .then(() => this.router.navigate(['/']));
+      .then(() => this.location.back());
   }
 
   goToPreviousPage() {
-    this.router.navigate(['..']);
+    this.location.back();
   }
 }
