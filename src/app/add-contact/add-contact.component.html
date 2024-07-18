@@ -2,11 +2,107 @@
   [formGroup]="contactForm"
   (ngSubmit)="$event.preventDefault(); createContact()"
 >
-  <input placeholder="Name" formControlName="nameField" required />
-  <input placeholder="Surname" formControlName="surnameField" required />
-  <input placeholder="Phone number" formControlName="phoneNumberField" required />
-  <input placeholder="Birth date" formControlName="birthDateField" required />
-  <input placeholder="Email" formControlName="emailField" required />
-  <input placeholder="Address" formControlName="addressField" required />
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Name"
+        formControlName="nameField"
+        name="name"
+      />
+      <label class="input-label" for="name"
+        >Enter name<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.nameField)" class="input-errors">
+      {{ getMessage(fields.nameField) }}
+    </div>
+  </div>
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Surname"
+        formControlName="surnameField"
+        name="surname"
+      />
+      <label class="input-label" for="surname"
+        >Enter surname<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.surnameField)" class="input-errors">
+      {{ getMessage(fields.surnameField) }}
+    </div>
+  </div>
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Phone number"
+        formControlName="phoneNumberField"
+        name="phoneNumber"
+      />
+      <label class="input-label" for="phoneNumber"
+        >Enter phone number<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.phoneNumberField)" class="input-errors">
+      {{ getMessage(fields.phoneNumberField) }}
+    </div>
+  </div>
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Birth date"
+        formControlName="birthDateField"
+        name="birthDate"
+      />
+      <label class="input-label" for="birthDate"
+        >Enter birth date<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.birthDateField)" class="input-errors">
+      {{ getMessage(fields.birthDateField) }}
+    </div>
+  </div>
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Email"
+        formControlName="emailField"
+        name="email"
+      />
+      <label class="input-label" for="email"
+        >Enter email<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.emailField)" class="input-errors">
+      {{ getMessage(fields.emailField) }}
+    </div>
+  </div>
+  <div class="input-container">
+    <div class="input-field-container">
+      <input
+        class="input-field"
+        placeholder="Address"
+        formControlName="addressField"
+        name="address"
+      />
+      <label class="input-label" for="address"
+        >Enter address<span class="required-star">*</span>:</label
+      >
+      <span class="input-highlight"></span>
+    </div>
+    <div *ngIf="invalid(fields.addressField)" class="input-errors">
+      {{ getMessage(fields.addressField) }}
+    </div>
+  </div>
   <button type="submit">Create</button>
 </form>

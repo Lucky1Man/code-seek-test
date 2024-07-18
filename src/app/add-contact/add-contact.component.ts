@@ -9,6 +9,7 @@ import {
 import { ContactsService } from '../services/contacts.service';
 import { CreateContactDto } from '../../shared/create-contact-dto';
 import { Router } from '@angular/router';
+import { getMeaningfulMessage } from '../../shared/input-fields-utils';
 
 type ContactForm = {
   nameField: FormControl;
@@ -51,6 +52,16 @@ export class AddContactComponent {
     emailField: new FormControl('', [Validators.required, Validators.email]),
     addressField: new FormControl('', [Validators.required]),
   });
+
+  fields = this.contactForm.controls;
+
+  invalid(field: FormControl) {
+    return field.touched && field.invalid;
+  }
+
+  getMessage(field: FormControl) {
+    return getMeaningfulMessage(field);
+  }
 
   createContact() {
     console.log('Submitted');
