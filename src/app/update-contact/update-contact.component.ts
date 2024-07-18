@@ -5,17 +5,22 @@ import { ContactsService } from '../services/contacts.service';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UpdateContactDto } from '../../shared/update-contact-dto';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { getMeaningfulMessage } from '../../shared/input-fields-utils';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 type UpdateContactFormType = {
   nameField: FormControl<string | null>;
   surnameField: FormControl<string | null>;
   phoneNumberField: FormControl<string | null>;
-  birthDateField: FormControl<string | null>;
+  birthDateField: FormControl<Date | null>;
   emailField: FormControl<string | null>;
   addressField: FormControl<string | null>;
 };
@@ -23,7 +28,14 @@ type UpdateContactFormType = {
 @Component({
   selector: 'app-update-contact',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDatepickerModule
+  ],
   templateUrl: './update-contact.component.html',
   styleUrl: './update-contact.component.scss',
 })
@@ -34,12 +46,13 @@ export class UpdateContactComponent implements OnInit {
     nameField: new FormControl(''),
     surnameField: new FormControl(''),
     phoneNumberField: new FormControl(''),
-    birthDateField: new FormControl(''),
+    birthDateField: new FormControl(new Date()),
     emailField: new FormControl(''),
     addressField: new FormControl(''),
   });
   contactId: number;
   oldContact = new Contact();
+  fields = this.updateContactForm.controls;
 
   constructor(
     private contactService: ContactsService,
@@ -74,7 +87,7 @@ export class UpdateContactComponent implements OnInit {
             Validators.pattern(this.phoneNumberRegex),
           ]),
           birthDateField: new FormControl(
-            oldContact.birthDate.toLocaleDateString(),
+            oldContact.birthDate,
             [Validators.required]
           ),
           emailField: new FormControl(oldContact.email, [
@@ -85,7 +98,16 @@ export class UpdateContactComponent implements OnInit {
             Validators.required,
           ]),
         });
+        this.fields = this.updateContactForm.controls;
       });
+  }
+
+  invalid(field: FormControl) {
+    return field.touched && field.invalid;
+  }
+
+  getMessage(field: FormControl) {
+    return getMeaningfulMessage(field);
   }
 
   updateContact() {
@@ -118,8 +140,8 @@ export class UpdateContactComponent implements OnInit {
           birthDate:
             birthDateField.value !== null &&
             birthDateField.value !==
-              this.oldContact.birthDate.toLocaleDateString()
-              ? birthDateField.value
+              this.oldContact.birthDate
+              ? birthDateField.value.toLocaleDateString()
               : undefined,
           email:
             emailField.value !== null &&

@@ -6,10 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ContactsService } from '../services/contacts.service';
-import { CreateContactDto } from '../../shared/create-contact-dto';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
+import { CreateContactDto } from '../../shared/create-contact-dto';
 import { getMeaningfulMessage } from '../../shared/input-fields-utils';
+import { ContactsService } from '../services/contacts.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 type ContactForm = {
   nameField: FormControl;
@@ -23,7 +27,11 @@ type ContactForm = {
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatDatepickerModule
+  ],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',
 })
@@ -64,7 +72,6 @@ export class AddContactComponent {
   }
 
   createContact() {
-    console.log('Submitted');
     const {
       nameField,
       surnameField,
@@ -72,7 +79,11 @@ export class AddContactComponent {
       birthDateField,
       emailField,
       addressField,
-    } = this.contactForm.controls;
+    } = this.fields;
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+      return;
+    }
     this.contactsService
       .saveContact(
         new CreateContactDto({

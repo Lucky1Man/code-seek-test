@@ -2,11 +2,78 @@
   [formGroup]="updateContactForm"
   (ngSubmit)="$event.preventDefault(); updateContact()"
 >
-  <input placeholder="Name" formControlName="nameField" required [value]="oldContact.name"/>
-  <input placeholder="Surname" formControlName="surnameField" required [value]="oldContact.surname"/>
-  <input placeholder="Phone number" formControlName="phoneNumberField" required [value]="oldContact.phoneNumber"/>
-  <input placeholder="Birth date" formControlName="birthDateField" required [value]="oldContact.birthDate"/>
-  <input placeholder="Email" formControlName="emailField" required [value]="oldContact.email"/>
-  <input placeholder="Address" formControlName="addressField" required [value]="oldContact.address"/>
+  <mat-form-field>
+    <mat-label>Enter your name</mat-label>
+    <input matInput placeholder="Name" formControlName="nameField" required />
+    @if (invalid(fields.nameField)) {
+    <mat-error>{{ getMessage(fields.nameField) }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter your surname</mat-label>
+    <input
+      matInput
+      placeholder="Surname"
+      formControlName="surnameField"
+      required
+    />
+    @if (invalid(fields.surnameField)) {
+    <mat-error>{{ getMessage(fields.surnameField) }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter your phone number</mat-label>
+    <input
+      matInput
+      placeholder="Phone number"
+      formControlName="phoneNumberField"
+      required
+    />
+    @if (invalid(fields.phoneNumberField)) {
+    <mat-error>{{ getMessage(fields.phoneNumberField) }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Birth date</mat-label>
+    <input
+      matInput
+      formControlName="birthDateField"
+      required
+      [matDatepicker]="picker"
+      placeholder="MM/DD/YYYY"
+    />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    @if (invalid(fields.birthDateField)) {
+    <mat-error>{{ getMessage(fields.birthDateField) }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      placeholder="email@email.com"
+      formControlName="emailField"
+      required
+    />
+    @if (invalid(fields.emailField)) {
+    <mat-error>{{ getMessage(fields.emailField) }}</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Enter your address</mat-label>
+    <input
+      matInput
+      placeholder="Address"
+      formControlName="addressField"
+      required
+    />
+    @if (invalid(fields.addressField)) {
+    <mat-error>{{ getMessage(fields.addressField) }}</mat-error>
+    }
+  </mat-form-field>
   <button type="submit">Update</button>
 </form>

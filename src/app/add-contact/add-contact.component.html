@@ -6,13 +6,11 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Name"
+        placeholder="Name*"
         formControlName="nameField"
         name="name"
       />
-      <label class="input-label" for="name"
-        >Enter name<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="name">Enter name*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.nameField)" class="input-errors">
@@ -23,13 +21,11 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Surname"
+        placeholder="Surname*"
         formControlName="surnameField"
         name="surname"
       />
-      <label class="input-label" for="surname"
-        >Enter surname<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="surname">Enter surname*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.surnameField)" class="input-errors">
@@ -40,13 +36,11 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Phone number"
+        placeholder="Phone number*"
         formControlName="phoneNumberField"
         name="phoneNumber"
       />
-      <label class="input-label" for="phoneNumber"
-        >Enter phone number<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="phoneNumber">Enter phone number*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.phoneNumberField)" class="input-errors">
@@ -57,14 +51,19 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Birth date"
+        placeholder="Birth date* MM/DD/YYYY"
         formControlName="birthDateField"
         name="birthDate"
+        [matDatepicker]="picker"
       />
-      <label class="input-label" for="birthDate"
-        >Enter birth date<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="birthDate">Enter birth date*:</label>
       <span class="input-highlight"></span>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        class="datepicker-toggle"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </div>
     <div *ngIf="invalid(fields.birthDateField)" class="input-errors">
       {{ getMessage(fields.birthDateField) }}
@@ -74,13 +73,11 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Email"
+        placeholder="Email*"
         formControlName="emailField"
         name="email"
       />
-      <label class="input-label" for="email"
-        >Enter email<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="email">Enter email*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.emailField)" class="input-errors">
@@ -91,18 +88,18 @@
     <div class="input-field-container">
       <input
         class="input-field"
-        placeholder="Address"
+        placeholder="Address*"
         formControlName="addressField"
         name="address"
       />
-      <label class="input-label" for="address"
-        >Enter address<span class="required-star">*</span>:</label
-      >
+      <label class="input-label" for="address">Enter address*:</label>
       <span class="input-highlight"></span>
     </div>
     <div *ngIf="invalid(fields.addressField)" class="input-errors">
       {{ getMessage(fields.addressField) }}
     </div>
   </div>
-  <button type="submit">Create</button>
+  <div class="button-container">
+    <button class="button" type="submit">Create</button>
+  </div>
 </form>
