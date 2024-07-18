@@ -1,0 +1,12 @@
+<form
+  [formGroup]="contactForm"
+  (ngSubmit)="$event.preventDefault(); createContact()"
+>
+  <input placeholder="Name" formControlName="nameField" required />
+  <input placeholder="Surname" formControlName="surnameField" required />
+  <input placeholder="Phone number" formControlName="phoneNumberField" required />
+  <input placeholder="Birth date" formControlName="birthDateField" required />
+  <input placeholder="Email" formControlName="emailField" required />
+  <input placeholder="Address" formControlName="addressField" required />
+  <button type="submit">Create</button>
+</form>

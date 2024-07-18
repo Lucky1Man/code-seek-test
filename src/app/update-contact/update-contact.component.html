@@ -1,0 +1,12 @@
+<form
+  [formGroup]="updateContactForm"
+  (ngSubmit)="$event.preventDefault(); updateContact()"
+>
+  <input placeholder="Name" formControlName="nameField" required [value]="oldContact.name"/>
+  <input placeholder="Surname" formControlName="surnameField" required [value]="oldContact.surname"/>
+  <input placeholder="Phone number" formControlName="phoneNumberField" required [value]="oldContact.phoneNumber"/>
+  <input placeholder="Birth date" formControlName="birthDateField" required [value]="oldContact.birthDate"/>
+  <input placeholder="Email" formControlName="emailField" required [value]="oldContact.email"/>
+  <input placeholder="Address" formControlName="addressField" required [value]="oldContact.address"/>
+  <button type="submit">Update</button>
+</form>

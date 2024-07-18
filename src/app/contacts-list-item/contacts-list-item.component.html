@@ -1,0 +1,7 @@
+<div>
+    <div><span>Name: </span><span>{{contactItem.name}}</span></div>
+    <div><span>Surname: </span><span>{{contactItem.surname}}</span></div>
+    <div><span>Phone number: </span><span>{{contactItem.phoneNumber}}</span></div>
+    <div>Delete? <input (click)="toggleIsMarkedForDeletion()" [checked]="contactItem.isMarkedForDeletion" type="checkbox"></div>
+    <button (click)="goToEditContactPage()">Edit</button>
+</div>
