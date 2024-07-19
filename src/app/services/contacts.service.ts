@@ -9,7 +9,7 @@ import { ContactsShareService } from './contacts-share.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ContactsService implements OnDestroy {
+export class ContactsService {
   private static readonly CONTACTS_KEY = 'contacts';
   private static readonly CURRENT_INDEX_VALUE_KEY = 'index-value';
 
@@ -19,10 +19,6 @@ export class ContactsService implements OnDestroy {
     ContactsService.contactsIdCounter = Number.parseInt(
       localStorage.getItem(ContactsService.CURRENT_INDEX_VALUE_KEY) ?? '0'
     );
-  }
-
-  ngOnDestroy(): void {
-    console.log('ContactsService destroyed')
   }
 
   async fetchContacts(): Promise<ContactsList> {
@@ -40,11 +36,11 @@ export class ContactsService implements OnDestroy {
   }
 
   private getContactsFromLocalStorage() {
-    const newLocal = JSON.parse(
-      localStorage.getItem(ContactsService.CONTACTS_KEY) ?? '[]'
-    ) as Contact[];
-    const newLocal_1 = newLocal.map((contact) => new Contact(contact));
-    return newLocal_1;
+    return (
+      JSON.parse(
+        localStorage.getItem(ContactsService.CONTACTS_KEY) ?? '[]'
+      ) as Contact[]
+    ).map((contact) => new Contact(contact));
   }
 
   async saveContact(contact: CreateContactDto): Promise<number> {
