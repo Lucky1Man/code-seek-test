@@ -1,13 +1,25 @@
-<input
-  placeholder="Enter name"
-  type="text"
-  [matAutocomplete]="auto"
-  [formControl]="contactNameField"
-/>
-<mat-autocomplete #auto="matAutocomplete">
-  @for (option of filteredOptions | async; track option) {
-  <mat-option [value]="option">{{ option }}</mat-option>
-  }
-</mat-autocomplete>
-<button type="button" (click)="updateFilter()">Search</button>
-<button type="button" (click)="clearFilter()">Clear filter</button>
+<div class="filter-container">
+  <mat-form-field>
+    <mat-label>Enter name</mat-label>
+    <input
+      placeholder="Name"
+      type="text"
+      [matAutocomplete]="auto"
+      [formControl]="contactNameField"
+      matInput
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of filteredOptions | async; track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button type="button" (click)="updateFilter()">
+      Search
+    </button>
+    <button mat-raised-button type="button" (click)="clearFilter()">
+      Clear filter
+    </button>
+  </div>
+</div>

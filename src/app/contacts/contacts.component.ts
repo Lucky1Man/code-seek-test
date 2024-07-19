@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ContactsFilterComponent } from '../contacts-filter/contacts-filter.component';
 import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { ContactsShareService } from '../services/contacts-share.service';
 import { ContactsService } from '../services/contacts.service';
-import { ContactsFilterComponent } from "../contacts-filter/contacts-filter.component";
 
 @Component({
   selector: 'app-contacts',
@@ -32,9 +32,12 @@ export class ContactsComponent implements OnInit {
   }
 
   deleteSelectedContacts() {
-    const toBeDeleted = this.contactsShareService
-      .getCurrentContacts()
-      .contacts.filter((contact) => contact.isMarkedForDeletion)
+    const contacts = this.contactsShareService.getCurrentFilteredContacts();
+    if (contacts === undefined) {
+      return;
+    }
+    const toBeDeleted = contacts.contacts
+      .filter((contact) => contact.isMarkedForDeletion)
       .map((contact) => contact.id);
     this.contactsService.deleteByIds(toBeDeleted);
   }

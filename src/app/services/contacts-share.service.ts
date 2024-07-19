@@ -64,6 +64,12 @@ export class ContactsShareService {
       (contact) => !ids.includes(contact.id)
     );
     this.nextContacts(this.currentContacts);
+    if(this.currentFilteredContacts !== undefined) {
+      this.currentFilteredContacts.contacts = this.currentFilteredContacts.contacts.filter(
+        (contact) => !ids.includes(contact.id)
+      );
+      this.onFilteredContactsSubject.next(this.currentFilteredContacts);
+    }
   }
 
   replaceContact(contact: Contact) {

@@ -1,23 +1,27 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  ContactsList,
-  ManagedContactFilter,
-  ManagedContactListItem,
-} from '../../shared/contacts-list';
-import { ContactsShareService } from '../services/contacts-share.service';
-import { map, Observable, startWith, Subscription } from 'rxjs';
-import {
-  MatAutocomplete,
-  MatAutocompleteModule,
-} from '@angular/material/autocomplete';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AsyncPipe, Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, Observable, startWith, Subscription } from 'rxjs';
+import { ContactsList, ManagedContactFilter } from '../../shared/contacts-list';
+import { ContactsShareService } from '../services/contacts-share.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-contacts-filter',
   standalone: true,
-  imports: [MatAutocompleteModule, ReactiveFormsModule, AsyncPipe],
+  imports: [
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+  ],
   templateUrl: './contacts-filter.component.html',
   styleUrl: './contacts-filter.component.scss',
 })
@@ -67,11 +71,11 @@ export class ContactsFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.filteredOptions = this.contactNameField.valueChanges.pipe(
       startWith(''),
-      map((value) => this.filter(value || ''))
+      map((value) => this.filterAutoCompleteOptions(value || ''))
     );
   }
 
-  private filter(value: string): string[] {
+  private filterAutoCompleteOptions(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.nameOptions.filter((option) =>
       option.toLowerCase().includes(filterValue)
