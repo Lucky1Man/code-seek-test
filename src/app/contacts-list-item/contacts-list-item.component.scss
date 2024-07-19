@@ -1,0 +1,9 @@
+mat-card {
+    padding: 5px;
+    button {
+        margin: 7px;
+    }
+    .warn-selected {
+        background-color: rgba($color: #f7a9a9, $alpha: 1.0);
+    }
+}

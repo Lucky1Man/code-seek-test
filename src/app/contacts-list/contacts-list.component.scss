@@ -1,3 +1,7 @@
-.contacts-list-item {
-    margin-top: 10px;
+.contacts-container {
+    display: flex;
+    flex-wrap: wrap;
+    .contacts-list-item {
+        margin: 7px;
+    }
 }

@@ -4,11 +4,12 @@ import { ContactsFilterComponent } from '../contacts-filter/contacts-filter.comp
 import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { ContactsShareService } from '../services/contacts-share.service';
 import { ContactsService } from '../services/contacts.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-contacts',
   standalone: true,
-  imports: [ContactsListComponent, ContactsFilterComponent],
+  imports: [ContactsListComponent, ContactsFilterComponent, MatButtonModule],
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })

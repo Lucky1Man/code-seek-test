@@ -1,6 +1,12 @@
-<div>
-    <app-contacts-filter></app-contacts-filter>
-    <app-contacts-list></app-contacts-list>
-    <button (click)="openCreateContactPage()">Create contact</button>
-    <button (click)="deleteSelectedContacts()">Delete selected contacts</button>
+<div class="container">
+  <app-contacts-filter></app-contacts-filter>
+  <app-contacts-list></app-contacts-list>
+  <div class="buttons">
+    <button mat-raised-button (click)="openCreateContactPage()">
+      Create contact
+    </button>
+    <button mat-raised-button (click)="deleteSelectedContacts()">
+      Delete selected contacts
+    </button>
+  </div>
 </div>

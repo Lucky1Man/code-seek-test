@@ -1,14 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ContactsListItem } from '../../shared/contacts-list-item';
 import { CommonModule } from '@angular/common';
-import { ManagedContactListItem } from '../../shared/contacts-list';
-import { ContactsShareService } from '../services/contacts-share.service';
+import { Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import { ManagedContactListItem } from '../../shared/contacts-list';
+import { MatIconModule } from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-contacts-list-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+  ],
   templateUrl: './contacts-list-item.component.html',
   styleUrl: './contacts-list-item.component.scss',
 })
@@ -23,11 +31,10 @@ export class ContactsListItemComponent {
   }
 
   goToEditContactPage() {
-    this.router.navigate(['/editContact', this.contactItem.id])
+    this.router.navigate(['/editContact', this.contactItem.id]);
   }
 
   goToContactDetailsPage() {
-    this.router.navigate(['/viewDetails', this.contactItem.id])
+    this.router.navigate(['/viewDetails', this.contactItem.id]);
   }
-
 }

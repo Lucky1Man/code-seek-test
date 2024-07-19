@@ -1,5 +1,7 @@
-<div *ngFor="let contact of contacts.contacts; trackBy: trackById">
-    <div class="contacts-list-item">
-        <app-contacts-list-item [contactItem]="contact"></app-contacts-list-item>
+<div class="contacts-container">
+    <div *ngFor="let contact of contacts.contacts; trackBy: trackById">
+        <div class="contacts-list-item">
+            <app-contacts-list-item [contactItem]="contact"></app-contacts-list-item>
+        </div>
     </div>
 </div>
