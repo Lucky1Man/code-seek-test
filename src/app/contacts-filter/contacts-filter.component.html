@@ -4,8 +4,8 @@
   [matAutocomplete]="auto"
   [formControl]="contactNameField"
 />
-<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-  @for (option of nameOptions; track option) {
+<mat-autocomplete #auto="matAutocomplete">
+  @for (option of filteredOptions | async; track option) {
   <mat-option [value]="option">{{ option }}</mat-option>
   }
 </mat-autocomplete>

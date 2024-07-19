@@ -22,7 +22,7 @@ export class ContactsShareService {
 
   nextContacts(contacts: ContactsList) {
     this.currentContacts = contacts;
-    if (this.currentFilteredContacts === undefined) {
+    if (this.currentFilteredContacts === undefined || this.currentFilteredContacts.contacts.length === 0) {
       this.nextContactsFilters(this.currentContactsFilters);
     }
     this.onContactsSubject.next(contacts);
@@ -52,10 +52,6 @@ export class ContactsShareService {
 
   getCurrentFilteredContacts() {
     return this.currentFilteredContacts;
-  }
-
-  getCurrentContactsFilters() {
-    return this.currentContactsFilters;
   }
 
   addContact(contact: ContactsListItem) {
